@@ -9,6 +9,8 @@ import MenuSection from "./MenuSection";
 import ImageSection from "./ImageSection";
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
+import { Store } from "@/types";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   storeName: z.string({
@@ -43,11 +45,12 @@ const formSchema = z.object({
 type StoreFormData = z.infer<typeof formSchema>;
 
 type Props = {
+  store?: Store;
   onSave: (storeFormData: FormData) => void;
   isLoading: boolean;
 };
 
-const ManageStoreForm = ({ onSave, isLoading }: Props) => {
+const ManageStoreForm = ({ onSave, isLoading, store }: Props) => {
   const form = useForm<StoreFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,6 +58,27 @@ const ManageStoreForm = ({ onSave, isLoading }: Props) => {
       menuItems: [{ name: "", price: 0 }],
     },
   });
+
+  useEffect(() => {
+    if (!store) {
+      return;
+    }
+
+    const deliveryPriceFormatted = parseInt(store.deliveryPrice.toFixed(2));
+
+    const menuItemsFormatted = store.menuItems.map((item) => ({
+      ...item,
+      price: parseInt(item.price.toFixed(2)),
+    }));
+
+    const updatedStore = {
+      ...store,
+      deliveryPrice: deliveryPriceFormatted,
+      menuItems: menuItemsFormatted,
+    };
+
+    form.reset(updatedStore);
+  }, [form, store]);
 
   const onSubmit = (formDataJson: StoreFormData) => {
     const formData = new FormData();
