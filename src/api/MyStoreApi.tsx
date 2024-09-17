@@ -68,8 +68,49 @@ export const useCreateMyStore = () => {
   }
 
   if (error) {
-    toast.error("Unable to update store");
+    toast.error("Unable to create store");
   }
 
   return { createStore, isLoading };
+};
+
+export const useUpdateMyStore = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const updateMyStoreRequest = async (
+    storeFormData: FormData
+  ): Promise<Store> => {
+    const accessToken = await getAccessTokenSilently();
+
+    const response = await fetch(`${API_BASE_URL}/api/my/store`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: storeFormData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update store");
+    }
+
+    return response.json();
+  };
+
+  const {
+    mutate: updateStore,
+    isLoading,
+    isSuccess,
+    error,
+  } = useMutation(updateMyStoreRequest);
+
+  if (isSuccess) {
+    toast.success("Store update successfully");
+  }
+
+  if (error) {
+    toast.error("Unable to update store");
+  }
+
+  return { updateStore, isLoading };
 };
