@@ -1,7 +1,9 @@
+import { useCreateMyStore } from "@/api/MyStoreApi";
 import ManageStoreForm from "@/forms/manage-store-form/ManageStoreForm";
 
 const ManageStorePage = () => {
-  return <ManageStoreForm />;
+  const { createStore, isLoading } = useCreateMyStore();
+  return <ManageStoreForm onSave={createStore} isLoading={isLoading} />;
 };
 
 export default ManageStorePage;
