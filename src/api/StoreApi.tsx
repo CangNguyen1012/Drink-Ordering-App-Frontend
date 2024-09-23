@@ -10,6 +10,7 @@ export const useSearchStores = (searchState: SearchState, city?: string) => {
     params.set("searchQuery", searchState.searchQuery);
     params.set("page", searchState.page.toString());
     params.set("selectedCuisines", searchState.selectedCuisines.join(","));
+    params.set("sortOption", searchState.sortOption);
 
     const response = await fetch(
       `${API_BASE_URL}/api/store/search/${city}?${params.toString()}`
