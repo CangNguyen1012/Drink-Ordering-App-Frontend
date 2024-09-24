@@ -56,6 +56,16 @@ const DetailPage = () => {
     });
   };
 
+  const removeFromCart = (CartItem: CartItem) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.filter(
+        (item) => CartItem._id !== item._id
+      );
+
+      return updatedCartItems;
+    });
+  };
+
   if (isLoading || !store) {
     return "Loading...";
   }
@@ -82,7 +92,11 @@ const DetailPage = () => {
 
         <div>
           <Card>
-            <OrderSummary store={store} cartItems={cartItems} />
+            <OrderSummary
+              store={store}
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+            />
           </Card>
         </div>
       </div>

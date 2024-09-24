@@ -3,13 +3,15 @@ import { CardContent, CardHeader, CardTitle } from "./ui/card";
 import { CartItem } from "@/pages/DetailPage";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
+import { Trash } from "lucide-react";
 
 type Props = {
   store: Store;
   cartItems: CartItem[];
+  removeFromCart: (cartItem: CartItem) => void;
 };
 
-const OrderSummary = ({ store, cartItems }: Props) => {
+const OrderSummary = ({ store, cartItems, removeFromCart }: Props) => {
   const getTotalCost = () => {
     const totalCost = cartItems.reduce(
       (total, cartItem) => total + cartItem.price * cartItem.quantity,
@@ -39,6 +41,12 @@ const OrderSummary = ({ store, cartItems }: Props) => {
               {item.name}
             </span>
             <span className="flex items-center gap-1">
+              <Trash
+                className="cursor-pointer"
+                color="red"
+                size={20}
+                onClick={() => removeFromCart(item)}
+              />
               {item.price * item.quantity} VND
             </span>
           </div>
