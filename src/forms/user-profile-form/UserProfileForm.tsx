@@ -94,7 +94,7 @@ const UserProfileForm = ({
             name="addressLine1"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Address Line 1</FormLabel>
+                <FormLabel>Address</FormLabel>
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
@@ -132,7 +132,7 @@ const UserProfileForm = ({
         {isLoading ? (
           <LoadingButton />
         ) : (
-          <Button type="submit" className="bg-orange-500">
+          <Button type="submit" className="bg-sky-500">
             {buttonText}
           </Button>
         )}

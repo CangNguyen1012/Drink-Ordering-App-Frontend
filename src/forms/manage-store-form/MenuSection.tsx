@@ -34,7 +34,7 @@ const MenuSection = () => {
         )}
       />
       <Button type="button" onClick={() => append({ name: "", price: "" })}>
-        Add Menu Item
+        Add more
       </Button>
     </div>
   );

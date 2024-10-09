@@ -1,4 +1,4 @@
-import hero from "../assets/hero.png";
+import hero from "../assets/Firefly drinks with background color is sky-500 15200.jpg";
 
 const Hero = () => {
   return (
