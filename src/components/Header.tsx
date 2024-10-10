@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import MainNav from "./MainNav";
+import { ModeToggle } from "./ModeToggle";
 
 const Header = () => {
   return (
@@ -9,6 +10,7 @@ const Header = () => {
         <Link to="/" className="text-3xl font-bold tracking-tight text-sky-500">
           ShipDrink.com
         </Link>
+        <ModeToggle />
         <div className="md:hidden">
           <MobileNav />
         </div>

@@ -24,7 +24,7 @@ const ManageStorePage = () => {
       </TabsList>
       <TabsContent
         value="orders"
-        className="space-y-5 bg-gray-50 pg-10 rounded-lg"
+        className="space-y-5 bg-sky-400 pg-10 rounded-lg"
       >
         <h2 className="text-2xl font-bold">{orders?.length} Active orders</h2>
         {orders?.map((order) => (

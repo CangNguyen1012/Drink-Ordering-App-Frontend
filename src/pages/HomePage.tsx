@@ -17,7 +17,7 @@ const HomePage = () => {
         <h1 className="text-5xl font-bold tracking-tight text-sky-500">
           Any stores you can order some drinks!
         </h1>
-        <span className="text-xl">
+        <span className="text-xl text-sky-500">
           Search our store whenever you want to drink!
         </span>
         <SearchBar
@@ -32,7 +32,7 @@ const HomePage = () => {
             Order takeaway even faster!
           </span>
           <span>
-            Download the ShipFood.com App for faster ordering and personalised
+            Download the ShipDrink.com App for faster ordering and personalised
             recommendations.
           </span>
           <img src={appDownloadImage} />

@@ -14,7 +14,7 @@ type Props = {
 
 const StoreInfo = ({ store }: Props) => {
   return (
-    <Card className="border-sla">
+    <Card className="border border-gray-200 rounded-md">
       <CardHeader>
         <CardTitle className="text-3xl font-bold tracking-tight">
           {store.storeName}

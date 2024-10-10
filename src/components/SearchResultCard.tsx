@@ -11,7 +11,7 @@ const SearchResultCard = ({ store }: Props) => {
   return (
     <Link
       to={`/detail/${store._id}`}
-      className="grid lg:grid-cols-[2fr_3fr] gap-5 group"
+      className="grid lg:grid-cols-[2fr_3fr] gap-5 group border border-gray-200 rounded-md"
     >
       <AspectRatio ratio={16 / 6}>
         <img
