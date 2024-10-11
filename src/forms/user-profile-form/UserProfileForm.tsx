@@ -54,7 +54,7 @@ const UserProfileForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSave)}
-        className="space-y-4 bg-gray-50 rounded-lg md:p-10"
+        className="space-y-4 bg-cyan-400 rounded-lg md:p-10"
       >
         <div>
           <h2 className="text-2xl font-bold">{title}</h2>
@@ -69,7 +69,7 @@ const UserProfileForm = ({
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} disabled className="bg-white" />
+                <Input {...field} disabled className="bg-white text-black" />
               </FormControl>
             </FormItem>
           )}
@@ -81,7 +81,7 @@ const UserProfileForm = ({
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" />
+                <Input {...field} className="bg-white text-black" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -96,7 +96,7 @@ const UserProfileForm = ({
               <FormItem className="flex-1">
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <Input {...field} className="bg-white" />
+                  <Input {...field} className="bg-white text-black" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,7 +109,7 @@ const UserProfileForm = ({
               <FormItem className="flex-1">
                 <FormLabel>City</FormLabel>
                 <FormControl>
-                  <Input {...field} className="bg-white" />
+                  <Input {...field} className="bg-white text-black" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -122,7 +122,7 @@ const UserProfileForm = ({
               <FormItem className="flex-1">
                 <FormLabel>Country</FormLabel>
                 <FormControl>
-                  <Input {...field} className="bg-white" />
+                  <Input {...field} className="bg-white text-black" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

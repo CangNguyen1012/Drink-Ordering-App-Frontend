@@ -64,6 +64,23 @@ const DetailPage = () => {
     });
   };
 
+  const updateCartItem = (updatedItem: CartItem, newQuantity: number) => {
+    if (newQuantity < 1) return; // Ensure quantity can't go below 1
+
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.map((item) =>
+        item._id === updatedItem._id ? { ...item, quantity: newQuantity } : item
+      );
+
+      sessionStorage.setItem(
+        `cartItems-${storeId}`,
+        JSON.stringify(updatedCartItems)
+      );
+
+      return updatedCartItems;
+    });
+  };
+
   const removeFromCart = (CartItem: CartItem) => {
     setCartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.filter(
@@ -134,6 +151,7 @@ const DetailPage = () => {
               store={store}
               cartItems={cartItems}
               removeFromCart={removeFromCart}
+              updateCartItem={updateCartItem}
             />
             <CardFooter>
               <CheckOutButton

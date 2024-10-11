@@ -1,17 +1,23 @@
 import { Store } from "@/types";
 import { CardContent, CardHeader, CardTitle } from "./ui/card";
 import { CartItem } from "@/pages/DetailPage";
-import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { Trash } from "lucide-react";
+import { Input } from "./ui/input";
 
 type Props = {
   store: Store;
   cartItems: CartItem[];
   removeFromCart: (cartItem: CartItem) => void;
+  updateCartItem: (cartItem: CartItem, newQuantity: number) => void;
 };
 
-const OrderSummary = ({ store, cartItems, removeFromCart }: Props) => {
+const OrderSummary = ({
+  store,
+  cartItems,
+  removeFromCart,
+  updateCartItem,
+}: Props) => {
   const getTotalCost = () => {
     const totalCost = cartItems.reduce(
       (total, cartItem) => total + cartItem.price * cartItem.quantity,
@@ -35,10 +41,16 @@ const OrderSummary = ({ store, cartItems, removeFromCart }: Props) => {
         {cartItems.map((item) => (
           <div className="flex justify-between">
             <span>
-              <Badge variant="outline" className="mr-2">
-                {item.quantity}
-              </Badge>
               {item.name}
+              <Input
+                type="number"
+                min={1}
+                value={item.quantity}
+                onChange={(e) =>
+                  updateCartItem(item, parseInt(e.target.value, 10) || 1)
+                }
+                className="w-16 text-center" // Ensure it's compact
+              />
             </span>
             <span className="flex items-center gap-1">
               <Trash
