@@ -1,7 +1,9 @@
+import OrderSteps from "@/components/OrderSteps";
 import landingImage from "../assets/Firefly_drinks_order_app_in_mobile_with_background_color_is_sky-500_36847-removebg-preview.png";
 import appDownloadImage from "../assets/appDownload.png";
 import SearchBar, { SearchForm } from "@/components/SearchBar";
 import { useNavigate } from "react-router-dom";
+import { Separator } from "@/components/ui/separator";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -25,6 +27,9 @@ const HomePage = () => {
           onSubmit={handleSearchSubmit}
         />
       </div>
+      <Separator />
+      <OrderSteps />
+      <Separator />
       <div className="grid md:grid-cols-2 gap-5">
         <img src={landingImage} />
         <div className="flex flex-col items-center justify-center gap-4 text-center">
