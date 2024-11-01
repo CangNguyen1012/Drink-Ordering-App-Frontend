@@ -45,29 +45,39 @@ const steps = [
 const OrderSteps: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto py-16 px-4">
-      <h2 className="text-center text-4xl font-extrabold text-gray-900 mb-12">
+      <h2 className="text-center text-4xl font-extrabold text-cyan-400 mb-12">
         Steps to Order a Drink
       </h2>
-      <div className="flex flex-col md:flex-row justify-between items-center">
+      <div className="flex flex-col md:flex-row justify-between items-center relative">
         {steps.map((step, index) => (
           <div
             key={index}
-            className="flex items-center justify-center px-6 md:px-4 text-center relative"
+            className="flex flex-col items-center justify-center w-full max-w-xs px-6 md:px-4 text-center relative transition-transform transform hover:scale-105 "
           >
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center border-2 border-gray-300 p-6 rounded-lg transition-shadow hover:shadow-lg">
               <div className="w-20 h-20 flex items-center justify-center rounded-full bg-sky-200 text-sky-500 text-4xl mb-4">
                 {step.icon}
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-cyan-400 mb-2">
                 {step.title}
               </h3>
               <p className="text-sm text-gray-600">{step.description}</p>
+              <div className="text-gray-500 text-sm mt-2">Step {index + 1}</div>
             </div>
-
-            {/* Arrow between steps */}
-            {index < steps.length - 1 && (
+          </div>
+        ))}
+        {/* Arrow between steps for desktop layout */}
+        {steps.map(
+          (_, index) =>
+            index < steps.length - 1 && (
               <svg
-                className="hidden md:block w-12 h-12 text-gray-300 absolute right-[-1.5rem] top-1/2 transform -translate-y-1/2"
+                key={`arrow-desktop-${index}`}
+                className="hidden md:block w-12 h-12 text-sky-500 absolute"
+                style={{
+                  top: "50%",
+                  left: `${(index + 1) * 16.66}%`,
+                  transform: "translate(-50%, -50%)",
+                }}
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -80,9 +90,8 @@ const OrderSteps: React.FC = () => {
                   d="M9 5l7 7-7 7"
                 ></path>
               </svg>
-            )}
-          </div>
-        ))}
+            )
+        )}
       </div>
     </div>
   );
