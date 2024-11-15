@@ -33,16 +33,16 @@ const HomePage = () => {
   return (
     <div className="flex flex-col gap-12">
       <div
-        className="md:px-32 bg-white rounded-lg shadow-md py-8 flex flex-col gap-5 text-center -mt-16"
+        className="md:px-32 bg-cyan-50 rounded-lg shadow-md py-8 flex flex-col gap-5 text-center -mt-16"
         data-aos="fade-in"
         data-aos-anchor-placement="top-bottom"
         data-aos-offset="200"
         data-aos-once="true"
       >
-        <h1 className="text-5xl font-bold tracking-tight text-sky-500">
+        <h1 className="text-5xl font-bold tracking-tight text-sky-600">
           Any stores you can order some drinks!
         </h1>
-        <span className="text-xl text-sky-500">
+        <span className="text-xl text-sky-600">
           Search our store whenever you want to drink!
         </span>
         <SearchBar

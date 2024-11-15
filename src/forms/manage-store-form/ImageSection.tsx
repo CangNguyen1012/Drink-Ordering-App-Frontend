@@ -11,27 +11,30 @@ import { useFormContext } from "react-hook-form";
 
 const ImageSection = () => {
   const { control, watch } = useFormContext();
-
   const existingImageUrl = watch("imageUrl");
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-4">
       <div>
-        <h2 className="text-2xl font-bold">Image</h2>
-        <FormDescription>
+        <h2 className="text-2xl font-bold text-gray-900">Image</h2>
+        <FormDescription className="text-gray-700">
           Add an image that will be displayed on your store listing in the
           search results. Adding a new image will overwrite the existing one.
         </FormDescription>
       </div>
-      <div className="flex flex-col gap-8 md:w-[50%}">
+
+      <div className="flex items-center gap-8 md:w-[50%]">
         {existingImageUrl && (
           <AspectRatio ratio={16 / 9}>
             <img
               src={existingImageUrl}
+              alt="Preview"
               className="rounded-md object-cover h-full w-full"
             />
           </AspectRatio>
         )}
+
+        {/* File Upload Input */}
         <FormField
           control={control}
           name="imageFile"
@@ -39,7 +42,7 @@ const ImageSection = () => {
             <FormItem>
               <FormControl>
                 <Input
-                  className="bg-white"
+                  className="bg-white w-full md:w-auto"
                   type="file"
                   accept=".jpg, .jpeg, .png"
                   onChange={(event) =>

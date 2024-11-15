@@ -50,18 +50,28 @@ const UserProfileForm = ({
     form.reset(currentUser);
   }, [currentUser, form]);
 
+  const handleSubmit = async (data: UserFormData) => {
+    try {
+      await onSave(data);
+    } catch (error) {
+      console.error("Failed to save user data:", error);
+    }
+  };
+
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSave)}
-        className="space-y-4 bg-cyan-400 rounded-lg md:p-10"
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="space-y-6 bg-blue-800 text-white rounded-lg p-6 md:p-10"
+        aria-live="polite"
       >
         <div>
           <h2 className="text-2xl font-bold">{title}</h2>
-          <FormDescription>
+          <FormDescription className="text-gray-300">
             View and change your profile info here
           </FormDescription>
         </div>
+
         <FormField
           control={form.control}
           name="email"
@@ -69,11 +79,16 @@ const UserProfileForm = ({
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} disabled className="bg-white text-black" />
+                <Input
+                  {...field}
+                  disabled
+                  className="bg-gray-200 text-black rounded-md p-2"
+                />
               </FormControl>
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="name"
@@ -81,14 +96,17 @@ const UserProfileForm = ({
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white text-black" />
+                <Input
+                  {...field}
+                  className="bg-gray-50 text-black rounded-md p-2"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row md:flex-wrap">
           <FormField
             control={form.control}
             name="addressLine1"
@@ -96,7 +114,10 @@ const UserProfileForm = ({
               <FormItem className="flex-1">
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <Input {...field} className="bg-white text-black" />
+                  <Input
+                    {...field}
+                    className="bg-gray-50 text-black rounded-md p-2"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,7 +130,10 @@ const UserProfileForm = ({
               <FormItem className="flex-1">
                 <FormLabel>City</FormLabel>
                 <FormControl>
-                  <Input {...field} className="bg-white text-black" />
+                  <Input
+                    {...field}
+                    className="bg-gray-50 text-black rounded-md p-2"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -122,17 +146,25 @@ const UserProfileForm = ({
               <FormItem className="flex-1">
                 <FormLabel>Country</FormLabel>
                 <FormControl>
-                  <Input {...field} className="bg-white text-black" />
+                  <Input
+                    {...field}
+                    className="bg-gray-50 text-black rounded-md p-2"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
+
         {isLoading ? (
           <LoadingButton />
         ) : (
-          <Button type="submit" className="bg-sky-500">
+          <Button
+            type="submit"
+            className="bg-sky-500 hover:bg-sky-600 rounded-md p-2 disabled:opacity-50"
+            disabled={isLoading}
+          >
             {buttonText}
           </Button>
         )}

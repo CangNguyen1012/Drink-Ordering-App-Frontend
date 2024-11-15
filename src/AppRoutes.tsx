@@ -8,6 +8,8 @@ import ManageStorePage from "./pages/ManageStorePage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import OrderStatusPage from "./pages/OrderStatusPage";
+import FaqPage from "./pages/FaqPage"; // Import FAQ page
+import CustomerSupportPage from "./pages/CustomerSupportPage"; // Import Customer Support page
 
 const AppRoutes = () => {
   return (
@@ -63,6 +65,25 @@ const AppRoutes = () => {
           }
         />
       </Route>
+
+      {/* New routes for FAQ and Customer Support */}
+      <Route
+        path="/faq"
+        element={
+          <Layout>
+            <FaqPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/customer-support"
+        element={
+          <Layout>
+            <CustomerSupportPage />
+          </Layout>
+        }
+      />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

@@ -13,14 +13,20 @@ import {
 import { ORDER_STATUS } from "@/config/order-status-config";
 import { useUpdateMyStoreOrder } from "@/api/MyStoreApi";
 import { useEffect, useState } from "react";
+import {
+  UserIcon,
+  MapPinIcon,
+  ClockIcon,
+  CurrencyDollarIcon,
+} from "@heroicons/react/24/outline";
 
 type Props = {
   order: Order;
+  index: number;
 };
 
-const OrderItemCard = ({ order }: Props) => {
+const OrderItemCard = ({ order, index }: Props) => {
   const { updateStoreStatus, isLoading } = useUpdateMyStoreOrder();
-
   const [status, setStatus] = useState<OrderStatus>(order.status);
 
   useEffect(() => {
@@ -35,71 +41,120 @@ const OrderItemCard = ({ order }: Props) => {
     setStatus(newStatus);
   };
 
+  const getBadgeColor = (status: OrderStatus) => {
+    switch (status) {
+      case "outForDelivery":
+        return "bg-green-500";
+      case "paid":
+        return "bg-yellow-500";
+      case "inProgress":
+        return "bg-blue-500";
+      case "placed":
+        return "bg-gray-500";
+      case "delivered":
+        return "bg-purple-500";
+      default:
+        return "bg-gray-300";
+    }
+  };
+
   const getTime = () => {
     const orderDateTime = new Date(order.createdAt);
-
     const hours = orderDateTime.getHours();
     const minutes = orderDateTime.getMinutes();
-
     const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-
     return `${hours}:${paddedMinutes}`;
   };
 
+  const cardBackground = index % 2 === 0 ? "bg-blue-50" : "bg-gray-50";
+
   return (
-    <Card>
+    <Card
+      className={`${cardBackground} border border-gray-200 rounded-lg shadow-md p-5 mb-8`}
+    >
       <CardHeader>
-        <CardTitle className="grid md:grid-cols-4 gap-4 justify-between mb-3">
-          <div>
-            Customer Name:
-            <span className="ml-2 font-normal">
+        <CardTitle className="flex flex-wrap gap-6 justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <UserIcon className="h-5 w-5 text-sky-700" />
+            <span className="font-semibold text-sky-700">Customer Name:</span>
+            <span className="ml-1 text-gray-800 font-bold">
               {order.deliveryDetails.name}
             </span>
           </div>
-          <div>
-            Delivery Address:
-            <span className="ml-2 font-normal">
+          <div className="flex items-center gap-2">
+            <MapPinIcon className="h-5 w-5 text-sky-700" />
+            <span className="font-semibold text-sky-700">
+              Delivery Address:
+            </span>
+            <span className="ml-1 text-gray-800 font-bold">
               {order.deliveryDetails.addressLine1}, {order.deliveryDetails.city}
             </span>
           </div>
-          <div>
-            Time:
-            <span className="ml-2 font-normal">{getTime()}</span>
+          <div className="flex items-center gap-2">
+            <ClockIcon className="h-5 w-5 text-sky-700" />
+            <span className="font-semibold text-sky-700">Time:</span>
+            <span className="ml-1 text-gray-800 font-bold">{getTime()}</span>
           </div>
-          <div>
-            Total Cost:
-            <span className="ml-2 font-normal">{order.totalAmount} VND</span>
+          <div className="flex items-center gap-2">
+            <CurrencyDollarIcon className="h-5 w-5 text-sky-700" />
+            <span className="font-semibold text-sky-700">Total Cost:</span>
+            <span className="ml-1 text-lg font-bold text-gray-800">
+              {order.totalAmount} VND
+            </span>
           </div>
         </CardTitle>
         <Separator />
       </CardHeader>
-      <CardContent className="flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
-          {order.cartItems.map((cartItem) => (
-            <span>
-              <Badge variant="outline" className="mr-2">
-                {cartItem.quantity}
-              </Badge>
-              {cartItem.name}
-            </span>
-          ))}
+
+      <CardContent className="flex flex-col gap-6 p-5 rounded-lg">
+        <div className="flex items-center gap-4 mb-4">
+          <Label className="text-sky-700">Order Status:</Label>
+          <Badge className={`text-white ${getBadgeColor(status)}`}>
+            {ORDER_STATUS.find((s) => s.value === status)?.label}
+          </Badge>
         </div>
+
+        <Separator />
+
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="status">What is the status of this order?</Label>
+          <Label htmlFor="status" className="text-sky-700">
+            Update Order Status:
+          </Label>
           <Select
             value={status}
             disabled={isLoading}
             onValueChange={(value) => handleStatusChange(value as OrderStatus)}
           >
-            <SelectTrigger id="status">
+            <SelectTrigger id="status" className="text-gray-800 bg-white">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
-            <SelectContent position="popper">
-              {ORDER_STATUS.map((status) => (
-                <SelectItem value={status.value}>{status.label}</SelectItem>
+            <SelectContent position="popper" className="shadow-lg">
+              {ORDER_STATUS.map((status, index) => (
+                <SelectItem key={index} value={status.value}>
+                  {status.label}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
+          {isLoading && (
+            <span className="text-sm text-gray-500 italic mt-1">
+              Updating status...
+            </span>
+          )}
+        </div>
+
+        <Separator />
+
+        {/* Cart Items Section */}
+        <div className="flex flex-col gap-2">
+          {order.cartItems.map((cartItem, index) => (
+            <div key={index} className="flex items-center">
+              <Badge variant="default" className="mr-2 bg-sky-500 text-white">
+                {cartItem.quantity}
+              </Badge>
+              <span className="font-medium text-gray-700">{cartItem.name}</span>
+            </div>
+          ))}
         </div>
       </CardContent>
     </Card>

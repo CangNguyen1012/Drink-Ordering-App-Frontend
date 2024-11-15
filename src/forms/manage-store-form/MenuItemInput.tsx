@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   FormControl,
   FormField,
@@ -8,6 +7,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
+import { TrashIcon } from "@heroicons/react/24/solid"; // Assuming Heroicons is installed
+import { Button } from "@/components/ui/button";
 
 type Props = {
   index: number;
@@ -18,41 +19,51 @@ const MenuItemInput = ({ index, removeMenuItem }: Props) => {
   const { control } = useFormContext();
 
   return (
-    <div className="flex flex-row items-end gap-2">
+    <div className="flex items-center gap-4 p-3 bg-white border border-gray-200 rounded-md shadow-sm">
       <FormField
         control={control}
         name={`menuItems.${index}.name`}
         render={({ field }) => (
-          <FormItem>
-            <FormLabel className="flex items-center gap-1">
-              Name <FormMessage />
-            </FormLabel>
+          <FormItem className="flex-1">
+            <FormLabel className="text-sm text-gray-600">Name</FormLabel>
             <FormControl>
-              <Input {...field} placeholder="Coffee" className="bg-white" />
+              <Input
+                {...field}
+                placeholder="Item name"
+                className="bg-white text-gray-600"
+              />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
+
       <FormField
         control={control}
         name={`menuItems.${index}.price`}
         render={({ field }) => (
-          <FormItem>
-            <FormLabel className="flex items-center gap-1">
-              Price (VND) <FormMessage />
-            </FormLabel>
+          <FormItem className="flex-1">
+            <FormLabel className="text-sm text-gray-600">Price (VND)</FormLabel>
             <FormControl>
-              <Input {...field} placeholder="25000" className="bg-white" />
+              <Input
+                {...field}
+                placeholder="Enter price"
+                className="bg-white text-gray-600"
+                type="number"
+              />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
+
+      {/* Delete Icon */}
       <Button
         type="button"
         onClick={removeMenuItem}
-        className="bg-red-500 max-h-fit"
+        className="text-red-500 hover:text-red-600 focus:outline-none p-2 rounded-full transition duration-200 ease-in-out shadow-sm"
       >
-        Remove
+        <TrashIcon className="w-8 h-8" />
       </Button>
     </div>
   );

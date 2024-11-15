@@ -22,15 +22,21 @@ const ManageStorePage = () => {
         <TabsTrigger value="orders">Orders</TabsTrigger>
         <TabsTrigger value="manage-store">Manage Store</TabsTrigger>
       </TabsList>
+
+      {/* Orders Tab */}
       <TabsContent
         value="orders"
-        className="space-y-5 bg-sky-400 pg-10 rounded-lg"
+        className="space-y-8 bg-sky-500 p-10 rounded-lg shadow-lg"
       >
-        <h2 className="text-2xl font-bold">{orders?.length} Active orders</h2>
-        {orders?.map((order) => (
-          <OrderItemCard order={order} />
-        ))}
+        <h2 className="text-2xl font-bold">{orders?.length} Active Orders</h2>
+        <div className="space-y-6">
+          {orders?.map((order, index) => (
+            <OrderItemCard order={order} index={index} />
+          ))}
+        </div>
       </TabsContent>
+
+      {/* Manage Store Tab */}
       <TabsContent value="manage-store">
         <ManageStoreForm
           store={store}

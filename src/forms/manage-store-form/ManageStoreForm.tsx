@@ -117,16 +117,32 @@ const ManageStoreForm = ({ onSave, isLoading, store }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 bg-sky-400 p-10 rounded-lg"
+        className="space-y-8 bg-gradient-to-br from-sky-400 to-blue-400 p-10 rounded-lg border border-gray-200 shadow-md"
       >
-        <DetailsSection />
-        <Separator />
-        <CuisinesSection />
-        <Separator />
-        <MenuSection />
-        <Separator />
-        <ImageSection />
-        {isLoading ? <LoadingButton /> : <Button type="submit">Submit</Button>}
+        {/* Styled Section Headers */}
+        <h2 className="text-3xl font-extrabold ">Manage Your Store</h2>
+
+        <div className="space-y-6">
+          <DetailsSection />
+          <Separator />
+          <CuisinesSection />
+          <Separator />
+          <MenuSection />
+          <Separator />
+          <ImageSection />
+        </div>
+
+        {/* Styled Submit Button */}
+        {isLoading ? (
+          <LoadingButton />
+        ) : (
+          <Button
+            type="submit"
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-200 ease-in-out transform hover:scale-105 focus:outline-none"
+          >
+            Submit
+          </Button>
+        )}
       </form>
     </Form>
   );

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <div className="bg-sky-500 py-10 text-white">
@@ -16,19 +18,19 @@ const Footer = () => {
             <span className="font-bold tracking-tight mb-2">Quick Links</span>
             <ul className="text-sm space-y-2">
               <li>
-                <a href="#faq" className="hover:underline">
+                <Link to="/faq" className="hover:underline">
                   FAQs
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#support" className="hover:underline">
+                <Link to="/customer-support" className="hover:underline">
                   Customer Support
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#categories" className="hover:underline">
+                <Link to="/categories" className="hover:underline">
                   Drink Categories
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -37,14 +39,14 @@ const Footer = () => {
             <span className="font-bold tracking-tight mb-2">Legal</span>
             <ul className="text-sm space-y-2">
               <li>
-                <a href="#privacy-policy" className="hover:underline">
+                <Link to="/privacy-policy" className="hover:underline">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#terms-of-service" className="hover:underline">
+                <Link to="/terms-of-service" className="hover:underline">
                   Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
