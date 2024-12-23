@@ -66,7 +66,6 @@ const AppRoutes = () => {
         />
       </Route>
 
-      {/* New routes for FAQ and Customer Support */}
       <Route
         path="/faq"
         element={

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
-import { TrashIcon } from "@heroicons/react/24/solid"; // Assuming Heroicons is installed
+import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@/components/ui/button";
 
 type Props = {
