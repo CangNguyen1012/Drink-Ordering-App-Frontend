@@ -8,8 +8,10 @@ import ManageStorePage from "./pages/ManageStorePage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import OrderStatusPage from "./pages/OrderStatusPage";
-import FaqPage from "./pages/FaqPage"; // Import FAQ page
-import CustomerSupportPage from "./pages/CustomerSupportPage"; // Import Customer Support page
+import FaqPage from "./pages/FaqPage";
+import CustomerSupportPage from "./pages/CustomerSupportPage";
+import TermsOfServicePage from "./pages/TermOfServicePage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 const AppRoutes = () => {
   return (
@@ -79,6 +81,22 @@ const AppRoutes = () => {
         element={
           <Layout>
             <CustomerSupportPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/privacy-policy"
+        element={
+          <Layout>
+            <PrivacyPolicyPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/terms-of-service"
+        element={
+          <Layout>
+            <TermsOfServicePage />
           </Layout>
         }
       />

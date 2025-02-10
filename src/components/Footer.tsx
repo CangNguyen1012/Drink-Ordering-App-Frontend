@@ -27,11 +27,6 @@ const Footer = () => {
                   Customer Support
                 </Link>
               </li>
-              <li>
-                <Link to="/categories" className="hover:underline">
-                  Drink Categories
-                </Link>
-              </li>
             </ul>
           </div>
 
